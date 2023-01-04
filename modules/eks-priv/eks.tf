@@ -23,7 +23,6 @@ locals {
   tags = {
     environment = var.environment
     github_repo = "foundations"
-    github_org  = "Commonplace-Digital-Ltd"
   }
 }
 

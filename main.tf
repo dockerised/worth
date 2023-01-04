@@ -232,6 +232,7 @@ resource "docker_image" "worth" {
   name = "docker.io/george7522/worth"
   build {
     path = "."
+    no_cache = true
     dockerfile = "./docker/Dockerfile"
     tag  = ["george7522/worth:latest"]
   }
