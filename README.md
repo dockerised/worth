@@ -46,6 +46,6 @@ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock:ro --workdir /a
 # Tf init
 docker run --rm -it --workdir /app -e AWS_PROFILE=$AWS_PROFILE -v /var/run/docker.sock:/var/run/docker.sock:ro  -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN -v ~/.aws:/root/.aws:ro -v `pwd`:/app george7522/terraform:0.13.5 init
 
-# TF apply
+# TF destroy
 docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock:ro --workdir /app -e AWS_PROFILE=$AWS_PROFILE  -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN -v ~/.aws:/root/.aws:ro -v `pwd`:/app george7522/terraform:0.13.5 destroy
 ```
