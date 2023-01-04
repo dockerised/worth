@@ -5,6 +5,10 @@ ToDo:
 - Test infrastructure 
 - Remove local-exec commands
 
+
+![](2023-01-04-09-38-51.png)
+![](2023-01-04-09-40-38.png)
+
 ## How to restrict updates
 
 Edit the `CODEOWNERS` file and add your staff github ids to the relevant sub-directories. Examples are given in [CODEOWNERS](./CODEOWNERS)
