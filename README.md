@@ -15,6 +15,7 @@ Prerequisities:
 
 - Install docker https://docs.docker.com/get-docker/
 - Login to Dockerhub on your docker desktop
+- Share `~/.aws` in Docker -> Preferences... -> Resources -> File Sharing.
 - AWS credentials setup `~/.aws/config` and `~/.aws/credentials`
 - Execute commands on a host running Linux/MacOS
 
@@ -31,21 +32,21 @@ docker push docker.io/george7522/terraform:0.13.5
 
 ```bash
 # Tf init
-docker run --rm -it --workdir /app -e AWS_PROFILE=$AWS_PROFILE -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN -v ~/.aws:/root/.aws:ro -v `pwd`:/app george7522/terraform:0.13.5 init
+docker run --rm -it --workdir /app -e AWS_REGION=$AWS_REGION -e AWS_PROFILE=$AWS_PROFILE -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN -v ~/.aws:/root/.aws:ro -v `pwd`:/app george7522/terraform:0.13.5 init
 
 # TF plan
-docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock:ro --workdir /app -e AWS_PROFILE=$AWS_PROFILE  -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN -v ~/.aws:/root/.aws:ro -v `pwd`:/app george7522/terraform:0.13.5 plan
+docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock:ro --workdir /app -e AWS_REGION=$AWS_REGION -e AWS_PROFILE=$AWS_PROFILE  -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN -v ~/.aws:/root/.aws:ro -v `pwd`:/app george7522/terraform:0.13.5 plan
 
 # TF apply
-docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock:ro --workdir /app -e AWS_PROFILE=$AWS_PROFILE -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN -v ~/.aws:/root/.aws:ro -v `pwd`:/app george7522/terraform:0.13.5 apply
+docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock:ro --workdir /app -e AWS_REGION=$AWS_REGION -e AWS_PROFILE=$AWS_PROFILE -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN -v ~/.aws:/root/.aws:ro -v `pwd`:/app george7522/terraform:0.13.5 apply
 ```
 
 ## Delete the stack
 
 ```bash
 # Tf init
-docker run --rm -it --workdir /app -e AWS_PROFILE=$AWS_PROFILE -v /var/run/docker.sock:/var/run/docker.sock:ro  -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN -v ~/.aws:/root/.aws:ro -v `pwd`:/app george7522/terraform:0.13.5 init
+docker run --rm -it --workdir /app -e AWS_REGION=$AWS_REGION -e AWS_PROFILE=$AWS_PROFILE -v /var/run/docker.sock:/var/run/docker.sock:ro  -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN -v ~/.aws:/root/.aws:ro -v `pwd`:/app george7522/terraform:0.13.5 init
 
 # TF destroy
-docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock:ro --workdir /app -e AWS_PROFILE=$AWS_PROFILE  -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN -v ~/.aws:/root/.aws:ro -v `pwd`:/app george7522/terraform:0.13.5 destroy
+docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock:ro --workdir /app -e AWS_REGION=$AWS_REGION -e AWS_PROFILE=$AWS_PROFILE  -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN -v ~/.aws:/root/.aws:ro -v `pwd`:/app george7522/terraform:0.13.5 destroy
 ```
