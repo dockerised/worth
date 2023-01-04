@@ -1,0 +1,54 @@
+# See https://github.com/cogitogroupltd/helm-chart-boilerplate/tree/main/charts/common/values.yaml for full list of features
+
+image:
+  repository: george7522/worth
+  tag: latest
+  pullPolicy: Always 
+
+services:
+- name: http
+  containerPort: 80
+  targetPort: 80
+  protocol: TCP
+
+
+extraVolumes:
+- name: conf
+  configMap:
+    name: frontend-app-nginx-config
+extraVolumeMounts:
+- name: conf
+  mountPath: "/opt/nginx/conf.d"
+
+configMap:
+  enabled: true
+  name: frontend-app-nginx-config
+  files:
+    app.conf: |
+      server {
+          listen 80;
+          
+          server_name    worth.cogitogroup.co.uk localhost;
+
+          root /www/data/web;
+          
+          location / {
+              autoindex         on;
+              index  index.html index.htm;
+              root /www/data/web;
+            }
+          location /news {
+              autoindex         on;
+              index  index.html index.htm;
+              root /www/data/web/news;
+            }
+
+          location /people {
+              autoindex         on;
+              index  index.html index.htm;
+              root /www/data/web/people
+          }
+          
+
+          client_max_body_size 100m;
+        }

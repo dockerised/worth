@@ -1,0 +1,55 @@
+# See ../../charts/ingress-nginx/values.yaml for full list of features
+
+# LoadBalancerType: proxy_protocol
+whiteListing:
+  enabled: false
+
+image:
+  name: george7522/worth
+  tag: latest
+  pullPolicy: Always
+
+services:
+  - name: "http" # name "http" binds to http listeners 
+    type: NodePort
+    nodePort: 30080
+    containerPort: 80
+  - name: "https" # name "https" binds to https listeners 
+    type: NodePort
+    nodePort: 30443
+    containerPort: 443
+
+rollingUpdateMaxUnavailable: 1 # 1 is the minimum available value for this field when using DaemonSet
+
+basicAuth:
+  enabled: false
+  # users:
+  #   admin: SomePassWord.
+confd_inline:
+  enabled: true
+  files:
+    worth.cogitogroup.co.uk.conf: | 
+      server {
+          listen 80;
+          server_name worth.cogitogroup.co.uk localhost;
+
+
+          root /www/data/web;
+          
+          location / {
+              index  index.html index.htm;
+              root /www/data/web;
+            }
+          location /news {
+              alias /www/data/web/news;
+              autoindex on; 
+              
+            }
+
+          location /people {
+              try_files /index.html =404;
+              root /www/data/web/people;
+          }
+      }
+ssl:
+  enabled: false
