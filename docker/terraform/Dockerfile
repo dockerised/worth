@@ -67,6 +67,7 @@ RUN echo 'echo' >> ~/.bashrc && \
     echo 'echo "==========================="' >> ~/.bashrc && \
     echo 'echo' >> ~/.bashrc && \
     echo 'alias tf=terraform' >> ~/.bashrc && \
+    echo 'alias aws=awsv2' >> ~/.bashrc && \
     echo 'echo' >> ~/.bashrc 
 
 
