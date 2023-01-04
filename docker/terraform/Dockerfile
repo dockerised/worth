@@ -41,7 +41,7 @@ RUN rc-update add docker boot
 #
 # Install AWSCli
 #
-RUN apk update; apk add python3 py-pip ; python3 -m pip install awscli
+RUN apk update; apk add python3 py-pip ; python3 -m pip install awscliv2
 
 #
 # Install Dependencies for scripts
