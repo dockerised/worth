@@ -41,7 +41,7 @@ RUN rc-update add docker boot
 #
 # Install AWSCli
 #
-RUN apk update ; apt add curl unzip ; curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" ; unzip awscliv2.zip ; ./aws/install
+RUN apk update; apk add python3 py-pip ; python3 -m pip install awscli
 
 #
 # Install Dependencies for scripts
@@ -56,6 +56,8 @@ RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform
 RUN unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip && rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 RUN mv terraform /usr/bin/terraform
 RUN terraform version
+
+
 
 
 # Setup profile 
